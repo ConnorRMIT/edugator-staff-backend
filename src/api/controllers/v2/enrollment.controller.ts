@@ -3,8 +3,12 @@ import { EnrollmentAttributes } from '../../models/v2/enrollment.model';
 import * as EnrollmentDataLayer from '../../dal/enrollment';
 import { WithAuthProp } from '@clerk/clerk-sdk-node';
 
+type EnrollmentRouteParams = {
+  courseId?: string;
+};
+
 export const getUserEnrollments = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<EnrollmentRouteParams>>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {
@@ -17,7 +21,7 @@ export const getUserEnrollments = async (
 };
 
 export const getRoster = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<EnrollmentRouteParams>>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const enrollments = await EnrollmentDataLayer.getAllCourseEnrollments(
@@ -27,7 +31,7 @@ export const getRoster = async (
 };
 
 export const createEnrollment = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<EnrollmentRouteParams>>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {
@@ -46,7 +50,7 @@ export const createEnrollment = async (
 };
 
 export const updateEnrollment = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<EnrollmentRouteParams>>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {
@@ -65,7 +69,7 @@ export const updateEnrollment = async (
 };
 
 export const deleteEnrollmentById = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<EnrollmentRouteParams>>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {

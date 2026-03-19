@@ -2,8 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { WithAuthProp } from '@clerk/clerk-sdk-node';
 import * as EnrollmentDataLayer from '../dal/enrollment';
 
+type PermissionRouteParams = {
+  courseId?: string;
+};
+
 const NeedsInstructorPermissions = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<PermissionRouteParams>>,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

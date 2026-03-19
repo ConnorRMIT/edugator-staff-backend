@@ -8,6 +8,11 @@ import * as CourseDataLayer from '../../dal/course';
 import * as ProblemDataLayer from '../../dal/problem';
 import * as LessonDataLayer from '../../dal/lesson';
 
+type ModuleRouteParams = {
+  moduleId?: string;
+  problemId?: string;
+};
+
 export const postModule = async (
   req: Request,
   res: Response
@@ -43,7 +48,7 @@ export const getModules = async (
 };
 
 export const getModuleByID = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<void> => {
   try {
@@ -56,7 +61,7 @@ export const getModuleByID = async (
 };
 
 export const getModuleByProblemId = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   const problem = await ProblemDataLayer.getById(req.params.problemId, true);
@@ -71,7 +76,7 @@ export const getModuleByProblemId = async (
 };
 
 export const putModule = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -86,7 +91,7 @@ export const putModule = async (
 };
 
 export const deleteModule = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -104,7 +109,7 @@ export const deleteModule = async (
 };
 
 export const changeContentOrder = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   let updatedContent: any;

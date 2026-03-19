@@ -7,6 +7,11 @@ import {
 } from '../../models/v1/lesson.model';
 import { Module, ModuleDocument } from '../../models/v1/module.model';
 import { isMongoId } from '../../../util';
+
+type LessonRouteParams = {
+  lessonId?: string;
+};
+
 export const getLessons = async (
   _req: Request,
   res: Response
@@ -57,7 +62,7 @@ export const postLesson = async (
 };
 
 export const getLessonByID = async (
-  req: Request,
+  req: Request<LessonRouteParams>,
   res: Response
 ): Promise<void> => {
   let lesson: LessonDocument;
@@ -79,7 +84,10 @@ export const getLessonByID = async (
   }
 };
 
-export const putLesson = async (req: Request, res: Response): Promise<void> => {
+export const putLesson = async (
+  req: Request<LessonRouteParams>,
+  res: Response
+): Promise<void> => {
   // makes sure there is a moduleId given in the params
   try {
     if (!isMongoId(req.params.lessonId)) {
@@ -114,7 +122,7 @@ export const putLesson = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const deleteLesson = async (
-  req: Request,
+  req: Request<LessonRouteParams>,
   res: Response
 ): Promise<void> => {
   try {
@@ -133,13 +141,13 @@ export const deleteLesson = async (
       let i: number;
       for (i = 0; i < modules.length; i++) {
         modules[i].lessons = modules[i].lessons.filter((lessonId) => {
-          return lessonId != new Types.ObjectId(req.params.problemId);
+          return lessonId != new Types.ObjectId(req.params.lessonId);
         }) as [Types.ObjectId];
       }
       //Delete from contents array in each module
       for (i = 0; i < modules.length; i++) {
         modules[i].content = modules[i].content.filter((lessonId) => {
-          return lessonId != new Types.ObjectId(req.params.problemId);
+          return lessonId != new Types.ObjectId(req.params.lessonId);
         }) as [Types.ObjectId];
       }
       modules.forEach(async (module) => {

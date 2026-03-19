@@ -5,8 +5,12 @@ import * as ProblemDataLayer from '../../dal/problem';
 import * as ModuleDataLayer from '../../dal/module';
 import { v4 as uuidv4 } from 'uuid';
 
+type LessonRouteParams = {
+  lessonId?: string;
+};
+
 export const postLesson = async (
-  req: Request,
+  req: Request<LessonRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   const module_ = await ModuleDataLayer.getById(req.body.moduleId);
@@ -26,7 +30,7 @@ export const postLesson = async (
 };
 
 export const getLessonByID = async (
-  req: Request,
+  req: Request<LessonRouteParams>,
   res: Response
 ): Promise<void> => {
   // add validation for lessonId?
@@ -39,7 +43,10 @@ export const getLessonByID = async (
   }
 };
 
-export const putLesson = async (req: Request, res: Response): Promise<void> => {
+export const putLesson = async (
+  req: Request<LessonRouteParams>,
+  res: Response
+): Promise<void> => {
   try {
     const result = await LessonDataLayer.updateById(
       req.params.lessonId,
@@ -52,7 +59,7 @@ export const putLesson = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const deleteLesson = async (
-  req: Request,
+  req: Request<LessonRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {

@@ -7,8 +7,13 @@ import { Request, Response } from 'express';
 import { WithAuthProp } from '@clerk/clerk-sdk-node';
 import { v4 as uuidv4 } from 'uuid';
 
+type InvitationRouteParams = {
+  invitationId?: string;
+  courseId?: string;
+};
+
 export const getUserInvitations = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -24,7 +29,7 @@ export const getUserInvitations = async (
 };
 
 export const acceptInvitation = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -55,7 +60,7 @@ export const acceptInvitation = async (
 };
 
 export const rejectInvitation = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -77,7 +82,7 @@ export const rejectInvitation = async (
 };
 
 export const getInvitations = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -92,7 +97,7 @@ export const getInvitations = async (
 };
 
 export const createInvitations = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -127,7 +132,7 @@ export const createInvitations = async (
 };
 
 export const updateInvitation = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -145,7 +150,7 @@ export const updateInvitation = async (
 };
 
 export const deleteInvitations = async (
-  req: WithAuthProp<Request>,
+  req: WithAuthProp<Request<InvitationRouteParams>>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {

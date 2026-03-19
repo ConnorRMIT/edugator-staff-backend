@@ -13,6 +13,11 @@ import {
   TestCaseVisibility
 } from '../../validation/problem.validation';
 
+type ProblemRouteParams = {
+  problemId?: string;
+  moduleId?: string;
+};
+
 const filterOpenTestCases = (testCases: TestCase[]): TestCase[] => {
   return testCases.filter(
     (test) => test.visibility === TestCaseVisibility.IO_VISIBLE
@@ -20,7 +25,7 @@ const filterOpenTestCases = (testCases: TestCase[]): TestCase[] => {
 };
 
 const readStudentProblems = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   let studentProblems: any;
@@ -89,7 +94,7 @@ const readStudentProblems = async (
 };
 
 const readAdminProblems = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   let adminProblems: any;
@@ -135,7 +140,7 @@ const readAdminProblems = async (
 };
 
 const createProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const { error } = problemValidation(req.body);
@@ -185,7 +190,7 @@ const createProblem = async (
 };
 
 const updateProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const { error } = problemValidationWithoutModuleId(req.body);
@@ -229,7 +234,7 @@ const updateProblem = async (
 };
 
 const deleteProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const objectIdRegEx = /[0-9a-f]{24}/g;

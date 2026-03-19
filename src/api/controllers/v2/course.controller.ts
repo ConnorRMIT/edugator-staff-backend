@@ -6,8 +6,13 @@ import { ModuleAttributes } from '../../models/v2/module.model';
 
 import { Request, Response } from 'express';
 
+type CourseRouteParams = {
+  courseId?: string;
+  organizationId?: string;
+};
+
 export const createCourse = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   try {
@@ -20,7 +25,7 @@ export const createCourse = async (
 };
 
 export const deleteCourse = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -38,7 +43,7 @@ export const deleteCourse = async (
 };
 
 export const updateCourse = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -55,7 +60,7 @@ export const updateCourse = async (
 };
 
 export const getCourseById = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -71,7 +76,7 @@ export const getCourseById = async (
 };
 
 export const getCourses = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -86,7 +91,7 @@ export const getCourses = async (
 };
 
 export const getCourseStructure = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   const hidden = req.query.hidden ? req.query.hidden === 'true' : true;
@@ -138,7 +143,7 @@ export const getCourseStructure = async (
 };
 
 export const changeModuleOrder = async (
-  req: Request,
+  req: Request<CourseRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   let updatedModule: ModuleAttributes;

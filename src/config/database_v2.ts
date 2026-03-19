@@ -15,7 +15,7 @@ export const sequelize: Sequelize = new Sequelize(
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
-        rejectUnauthorized: true
+        rejectUnauthorized: false
       }
     },
     //eslint-disable-next-line

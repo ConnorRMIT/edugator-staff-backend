@@ -10,6 +10,11 @@ import { Lesson } from '../../models/v1/lesson.model';
 import { isMongoId } from '../../../util';
 import moduleValidation from '../../validation/module.validation';
 
+type ModuleRouteParams = {
+  moduleId?: string;
+  problemId?: string;
+};
+
 export const getModules = async (
   _req: Request,
   res: Response
@@ -51,7 +56,7 @@ export const getModulesWithNonHiddenProblemsAndTestCases = async (
 };
 
 export const getModuleByID = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<void> => {
   let modules: ModuleDocument;
@@ -76,7 +81,7 @@ export const getModuleByID = async (
 };
 
 export const getModuleByProblemId = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<Response<any, Record<string, any>>> => {
   if (!isMongoId(req.params.problemId)) {
@@ -162,7 +167,10 @@ export const postModules = async (
   }
 };
 
-export const putModule = async (req: Request, res: Response): Promise<void> => {
+export const putModule = async (
+  req: Request<ModuleRouteParams>,
+  res: Response
+): Promise<void> => {
   // makes sure there is a moduleId given in the params
   try {
     if (!isMongoId(req.params.moduleId)) {
@@ -210,7 +218,7 @@ export const putModule = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const deleteModule = async (
-  req: Request,
+  req: Request<ModuleRouteParams>,
   res: Response
 ): Promise<void> => {
   try {

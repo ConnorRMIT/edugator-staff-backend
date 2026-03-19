@@ -8,8 +8,12 @@ import * as LessonDataLayer from '../../dal/lesson';
 import * as ModuleDataLayer from '../../dal/module';
 import { v4 as uuidv4 } from 'uuid';
 
+type ProblemRouteParams = {
+  problemId?: string;
+};
+
 export const createProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   const module_ = await ModuleDataLayer.getById(req.body.moduleId);
@@ -50,7 +54,7 @@ export const createProblem = async (
 };
 
 export const getStudentProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -63,7 +67,7 @@ export const getStudentProblem = async (
 };
 
 export const getAdminProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -76,7 +80,7 @@ export const getAdminProblem = async (
 };
 
 export const updateProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
@@ -91,7 +95,7 @@ export const updateProblem = async (
 };
 
 export const deleteProblem = async (
-  req: Request,
+  req: Request<ProblemRouteParams>,
   res: Response
 ): Promise<Record<string, any>> => {
   try {
