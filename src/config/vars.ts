@@ -1,4 +1,9 @@
 // back end environment variables
+
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 export const judgeURI = process.env.PROD_JUDGE_URI;
 export const env = process.env.NODE_ENV;
 export const jwtExpirationInterval = 86400; // 1 day in seconds
